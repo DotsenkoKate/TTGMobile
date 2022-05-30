@@ -4,19 +4,19 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import {LinearGradient} from 'expo-linear-gradient';
 
+//Компонент страницы. Представляет собой полоску меню в верхней части экрана.
 export default function Header(props) {
 
     const navigator = useNavigation();
 
+    //Переход на страницу Логина
     const exit = () => {
         navigator.navigate('Login');
     };
 
+    //Переход на страницу Профиля
     const profile = () => {
-      if(props.login != 'Guest')
-      {
         navigator.navigate('Profile', {login: props.login, isDriver: props.isDriver});
-      }
     };
 
   return (

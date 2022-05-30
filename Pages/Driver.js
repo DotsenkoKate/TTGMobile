@@ -25,6 +25,7 @@ export default function Driver({route}) {
     const [start, setStart] = useState("Начать рейс");
     const [color, setColor] = useState('green');
 
+    //Видимость диалогового окна
     const [promptVis, setPromptVis] = useState(false);
 
     const changeStart = () => {
@@ -46,19 +47,22 @@ export default function Driver({route}) {
       };
 
     const sendProfit = (profit) => {
-        //
+        //Здесь должна быть отправка данных о прибыли за смену на сервер
+        //fetch
     };
 
     const sendChangeIsFull = () => {
-        //    
+        //Здесь должна быть отправка данных о текущем состоянии заполненности авто
+        //fetch
     };
 
     var tripTime;
     const getTripTime = (value) => {
         tripTime = value;
+        //Здесь должна происходить отправка геолокации и получение актуального списка автомобилей на маршруте
+        //fetch
+        //fetch
     };
-
-
 
     return (
         <SafeAreaView style={styles.container}>

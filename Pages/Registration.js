@@ -14,25 +14,32 @@ export default function Registration() {
   const [isEqual, setEqual] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
 
+  //Проверка на существующий логин
   const checkLogin = () => {
-    return true;
+    //Запрос на проверку о существовании логина
+    //fetch
+    return false;
   };
 
   const registrationClicked = () => 
   {
     if(password == repeate)
     {
-      if(checkLogin())
+      if(!checkLogin())
       {
+        //Запрос на регистрацию пользователя в системе
+        //fetch
         navigator.navigate('Login');
       }
       else
       {
+        //Такой логин уже существует
         setIsLogin(true);
       }
     }
     else
     {
+      //Пароли не совпадают
       setEqual(false);
     }
   };

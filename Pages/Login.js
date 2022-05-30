@@ -11,47 +11,25 @@ export default function Login() {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
 
+    //Переменные, отвечающие за отображение предупреждений о неправильном пароле/логине
     const [isTrueLogin, setIsTrueLogin] = useState(true);
     const [isTruePassword, setIsTruePassword] = useState(true);
 
     const [category, setCategory] = useState("P");
 
-    const checkPassword = () => 
-    {
-      //-------------------------------
-      if(true)
-      {
-        return true;
-      }
-      else
-      {
-        setIsTruePassword(false);
-        return false;
-      }
-    };
-
   const checkLogin = () =>
   {
-    //-------------------------------------------
+    //Здесь должна быть отправка запроса на проверку логина и пароля
+    //fetch
+
+    //Здесь пока находится тестовая проверка логина
     if(login == "User1" && category == 'P')
     {
-      if(checkPassword())
-      {
-        if(true)
-        {
-          navigator.navigate('Profile', {login: login, isDriver: false});
-        }
-      }
+      navigator.navigate('Profile', {login: login, isDriver: false});
     }
     else if(login == "Driver1" && category == 'D')
     {
-      if(checkPassword())
-      {
-        if(true)
-        {
-          navigator.navigate('Profile', {login: login, isDriver: true});
-        }
-      }
+        navigator.navigate('Profile', {login: login, isDriver: true});
     }
     else
     {
@@ -59,6 +37,7 @@ export default function Login() {
     }
   };
 
+  //Переход на страницу регистрации
   const regPage = () =>
   {
     navigator.navigate("Registration");

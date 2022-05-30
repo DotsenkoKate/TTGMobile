@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from '../Blocks/Header';
-import Dialog from "react-native-dialog";
 import TextStyles from "../Styles/TextStyles";
 
 export default function Profile({route}) {
@@ -19,25 +18,31 @@ export default function Profile({route}) {
   const [model, setModel] = useState("ГАЗель");
   const [carNumber, setCarNumber] = useState("А001АА134rus");
 
-  const [visible, setVisible] = useState(false);
-
   const [status, setStatus] = useState("Эксплуатируется");
 
   const changeStatus = () => {
     if(status == "Эксплуатируется")
-    {setStatus("На ремонте");}
+    {
+      //Здесь должен быть запрос на изменение статуса авто
+      //fetch
+      setStatus("На ремонте");
+    }
     else
     {
-        setVisible(true);
-        setStatus("Эксплуатируется");
+      //Здесь должен быть запрос на изменение статуса авто
+      //fetch
+      setStatus("Эксплуатируется");
     }
   };
 
   const deleteProfile = () => 
   {
-
+    //Здесь должен быть запрос на удаление профиля пользователя
+    //fetch
+    navigator.navigate('Login');
   };
 
+  //Переход на страницу с картой
   const toMap = () => {
     if(isDriver)
     {
@@ -58,32 +63,21 @@ export default function Profile({route}) {
       navigator.navigate('Passenger', {login: loginInput, isDriver: isDriver});
     }
   };
+
+  //Переход на страницу с профилем
   const exit = () => {
     navigator.navigate('Login');
   };
+
+  //Отправка запроса на изменение данных профиля и переход на страницу с картой
   const saveData = () => 
   {
     //save
-    if(isDriver)
-    {
-      var response = getWayInfo(wayName);
-      navigator.navigate('Driver', {
-        login: loginInput, 
-        isDriver: isDriver, 
-        way: wayName,
-        stationsList: response.stations,
-        carsList: response.cars,
-        avrTime: response.avrTime,
-        price: response.price,
-        region: regionContainingPoints(response.stations)
-      });
-    }
-    else
-    {
-      navigator.navigate('Passenger', {login: loginInput, isDriver: isDriver});
-    }
+    toMap();
   };
 
+  //Данная функция вычисляет оптимальный регион (координаты широты и долготы центра, а также зум карты) для полученного 
+  //списка остановок
   const regionContainingPoints = (points) => {
     let minLat, maxLat, minLng, maxLng;
   
@@ -112,8 +106,11 @@ export default function Profile({route}) {
     };
   };
 
+  //Получение информации о маршруте
   const getWayInfo = (wayName) => {
+    //Запрос на получение информации о маршруте
     //fetch
+    //Тестовый ответ
     var response = 
     {
       price: 25,

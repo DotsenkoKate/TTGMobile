@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { Stopwatch } from 'react-native-stopwatch-timer';
 import * as Location from 'expo-location';
 import { useNavigation } from '@react-navigation/native';
-//добавить отметку, добавить геолокацию...
+
 export default function Passenger({route}) {
 
   const navigator = useNavigation();
@@ -34,6 +34,7 @@ export default function Passenger({route}) {
   //const [location, setLocation] = useState(null);
 
   const [wayList, setWayList] = useState(()=>{
+    //Здесь должен быть запрос на получение списка наименований маршрута к серверу
     /*try {
       //
       fetch('https://jsonplaceholder.typicode.com/todos/1')
@@ -54,6 +55,8 @@ export default function Passenger({route}) {
   const [stopClock, setStopClock] = useState(false);
   const [loopVar, setLoopVar] = useState(1);
   
+  //Данная функция вычисляет оптимальный регион (координаты широты и долготы центра, а также зум карты) для полученного 
+  //списка остановок
   const regionContainingPoints = (points) => {
     let minLat, maxLat, minLng, maxLng;
   
@@ -82,7 +85,7 @@ export default function Passenger({route}) {
     };
   };
   
-
+  //Функция получения информации о маршруте
   const getWayInfo = (wayName) => {
     if(wayName == "-")
     {
@@ -97,7 +100,9 @@ export default function Passenger({route}) {
     }
     else
     {
+      //Здесь должен быть запрос на получение информации о маршруте к серверу
       //fetch
+      //Тестовый ответ
       var response = 
       {
         price: 25,
@@ -158,6 +163,7 @@ export default function Passenger({route}) {
       setPrice(response.price);
       setAvrTime(response.avrTime);
 
+      //Старт/рестарт таймера
       if(startClock)
       {
         var tmp = loopVar + 1;
@@ -172,9 +178,12 @@ export default function Passenger({route}) {
     }
   };
 
+  //Обновление положения автомобилей на карте
   const updateCarsList = () => 
   {
+    //Запрос на получение текущего местоположения автомобилей на выбранном маршруте к серверу
     //fetch
+    //Тестовые данные
     const testCars = [
       {
         number: "А000АА134rus",
@@ -189,12 +198,14 @@ export default function Passenger({route}) {
         isFull: true
       }
     ];
+
+    //Обновление таймера
     var tmp = loopVar + 1;
     setCarsList(testCars);
     setLoopVar(tmp);
-    //
   };
 
+  //Получение текущей геолокации
   const getLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== 'granted') {
@@ -269,7 +280,7 @@ export default function Passenger({route}) {
                   return {latitude: station.latitude, longitude: station.longitude};
                 })
               }
-              strokeColor="blue" // fallback for when `strokeColors` is not supported by the map-provider
+              strokeColor="blue"
               strokeWidth={5}
             />
           
